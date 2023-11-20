@@ -1,0 +1,54 @@
+﻿@using Applications.Models
+@{
+    Layout = "_LayoutLogin";
+}
+@model LoginVM
+@{
+    if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <p class="text-center text-danger">@Model.Message</p>
+    }
+    else
+    {
+        <p class="login-box-msg">Sign in to start your session</p>
+    }
+}
+<form action="" method="post">
+    <div class="input-group mb-2">
+        <input type="email" class="form-control" asp-for="@Model.EmailOrMobile" placeholder="Email">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+        </div>
+    </div>
+    <span class="text-danger" asp-validation-for="@Model.EmailOrMobile"></span>
+    <div class="input-group">
+        <input type="password" class="form-control" asp-for="@Model.Password" placeholder="Password">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+    </div>
+    <span class="text-danger" asp-validation-for="@Model.Password"></span>
+    <div class="row">
+        <div class="col-12">
+            <div class="icheck-primary">
+                <input type="checkbox" id="remember" asp-for="@Model.RememberMe">
+                <label for="remember">
+                    Remember Me
+                </label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        </div>
+    </div>
+</form>
+<p class="mb-1">
+    <a href="#">I forgot my password</a>
+</p>
+<p class="mb-0">
+    <a href="#" class="text-center">Register a new membership</a>
+</p>

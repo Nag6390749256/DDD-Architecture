@@ -1,0 +1,65 @@
+﻿@using Domain.Entities
+@using Domain.Enum;
+@model List<ApplicationUser>
+@if (Model != null && Model.Any())
+{
+    int i = 0;
+    foreach (var item in Model)
+    {
+        i++;
+        <tr data-item-id="">
+            <td>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    aria-expanded="false">
+                        <span class="flaticon-more-button-of-three-dots"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @if(item.Status == MasterStatus.RequestedForOnboarded){
+                            <a class="dropdown-item" href="/User/Profile?userId=@item.Id">
+                                <i class="fas fa-eye text-success"></i>View
+                            </a>
+                        }
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="loadList()">
+                            <i class="fas fa-redo-alt text-orange-peel"></i>Refresh
+                        </a>
+                    </div>
+                </div>
+            </td>
+            <td>@item.FirstName</td>
+            <td>@item.MeddleName</td>
+            <td>@item.LastName</td>
+            <td>@item.PhoneNumber</td>
+            <td>@item.AlternateNumber</td>
+            <td>@item.WhatsAppNumber</td>
+            <td>@item.Email</td>
+            <td>@item.Address</td>
+            <td>@item.PostalCode</td>
+            <td>
+                @if (item.Status == MasterStatus.Pending)
+                {
+                    <span class="badge badge-secondary">@item.Status.ToString()</span>
+                }
+                else if (item.Status == MasterStatus.RequestedForOnboarded)
+                {
+                    <span class="badge badge-warning">@item.Status.ToString()</span>
+                }
+                else if (item.Status == MasterStatus.Onboarded)
+                {
+                    <span class="badge badge-success">@item.Status.ToString()</span>
+                }
+                else
+                {
+                    <span class="badge badge-primary">@item.Status.ToString()</span>
+                }
+            </td>
+            <td>@item.EntryOn</td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="12"> No Records</td>
+    </tr>
+}
